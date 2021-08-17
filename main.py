@@ -1,6 +1,7 @@
 import json
-import time
 import os
+import time
+
 import requests
 
 
@@ -18,7 +19,7 @@ class CircularBuffer:
             self.pointer = (self.pointer + 1) % self.max_size
 
 
-def main():
+def lambda_handler():
     url = "https://api.airtable.com/v0/appDgJgMhHkLteXj9/MainTable?view=Grid%20view"
     key = "Bearer " + os.environ['API_KEY']
     headers = {
@@ -33,9 +34,8 @@ def main():
 
     cb = CircularBuffer(titles)
 
-    for i in cb.get_item():
-        print(" ".join(i))
-
-
-if __name__ == "__main__":
-    main()
+    for i in cb.get_three_items():
+        return {
+            'statusCode': 200,
+            'body': json.dumps(" ".join(i))
+        }
