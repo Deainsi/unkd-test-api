@@ -21,7 +21,7 @@ jobs:
       - name: Add lambda_function.py to zip
         env:
           API_KEY: ${{ secrets.API_KEY }}
-        run: zip -r deployment.zip main.py
+        run: zip -r deployment.zip lambda_function.py
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
