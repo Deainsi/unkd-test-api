@@ -1,0 +1,31 @@
+name: main
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip
+      - name: Add lambda_function.py to zip
+        run: zip -r deployment.zip main.py
+      - uses: aws-actions/configure-aws-credentials@v1
+      - env:
+          API_KEY: ${{secrets.API_KEY}}
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+      - name: Update lambda function
+        run: aws lambda update-function-code --function-name unkd-test-api --zip-file fileb://deployment.zip
