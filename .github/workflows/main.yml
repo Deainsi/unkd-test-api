@@ -22,7 +22,7 @@ jobs:
           pip install -r requirements.txt -t lib
       - name: Zip deployment package
         env:
-          API_KEY: ${{ secrets.API_K  EY }}
+          API_KEY: ${{ secrets.API_KEY }}
         run: |
           cd lib
           zip -r ../deployment.zip
