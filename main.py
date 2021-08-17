@@ -20,24 +20,20 @@ class CircularBuffer:
 
 
 def lambda_handler():
-    url = "https://api.airtable.com/v0/appDgJgMhHkLteXj9/MainTable?view=Grid%20view"
-    key = "Bearer " + "keylqsbeqJwvC6hst"
-    headers = {
-        "Authorization": key
-    }
-    response = requests.get(url, headers=headers)
-    records = json.loads(response.text)['records']
-
-    titles = []
-    for record in records:
-        titles.append(record['fields']['title'])
-
-    cb = CircularBuffer(titles)
-    # for i in cb.get_three_items():
-    #     return {
-    #         'statusCode': 200,
-    #         'body': json.dumps(" ".join(i))
-    #     }
+    # url = "https://api.airtable.com/v0/appDgJgMhHkLteXj9/MainTable?view=Grid%20view"
+    # key = "Bearer " + os.environ['API_KEY']
+    # headers = {
+    #     "Authorization": key
+    # }
+    # response = requests.get(url, headers=headers)
+    # records = json.loads(response.text)['records']
+    #
+    # titles = []
+    # for record in records:
+    #     titles.append(record['fields']['title'])
+    #
+    # cb = CircularBuffer(titles)
     return {
         'statusCode': 200,
-        'body': json.dumps(key)}
+        'body': json.dumps(key)
+    }
