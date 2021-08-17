@@ -21,7 +21,7 @@ class CircularBuffer:
 
 def lambda_handler(event, context):
     url = "https://api.airtable.com/v0/appDgJgMhHkLteXj9/MainTable?view=Grid%20view"
-    key = "Bearer " + "keylqsbeqJwvC6hst"
+    key = "Bearer " + os.environ['API_KEY']
     headers = {
         "Authorization": key
     }
@@ -35,5 +35,5 @@ def lambda_handler(event, context):
     cb = CircularBuffer(titles)
     return {
         'statusCode': 200,
-        'body': json.dumps(titles)
+        'body': json.dumps(titles, ensure_ascii=False).encode('utf8')
     }
