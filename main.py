@@ -33,9 +33,11 @@ def lambda_handler():
         titles.append(record['fields']['title'])
 
     cb = CircularBuffer(titles)
-
-    for i in cb.get_three_items():
-        return {
-            'statusCode': 200,
-            'body': json.dumps(" ".join(i))
-        }
+    # for i in cb.get_three_items():
+    #     return {
+    #         'statusCode': 200,
+    #         'body': json.dumps(" ".join(i))
+    #     }
+    return {
+        'statusCode': 200,
+        'body': json.dumps(key)}
