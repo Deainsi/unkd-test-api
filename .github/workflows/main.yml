@@ -25,7 +25,7 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
         run: |
           cd lib
-          zip -r ../deployment.zip
+          zip -r ../deployment.zip .
           cd ..
           zip -g deployment.zip lambda_function.py
       - uses: aws-actions/configure-aws-credentials@v1
